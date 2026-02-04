@@ -5,7 +5,7 @@ export const fetchDashboardstats = createAsyncThunk(
     "dashboard/fetchstats",
     async (_, thunkAPI) =>{
         try {
-            const res = await axios.get("http://localhost:5050/airline/admin/dashboard", {
+            const res = await axios.get("https://airline-booking-backend-58y6.onrender.com/airline/admin/dashboard", {
                 withCredentials : true
             })
             return res.data
