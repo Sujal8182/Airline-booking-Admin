@@ -1,6 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 const API = "https://airline-booking-backend-58y6.onrender.com/airline/admin/aircraft";
+// const API = "http://localhost:5050";
 
 export const fetchAircrafts = createAsyncThunk(
   "aircraft/fetch",

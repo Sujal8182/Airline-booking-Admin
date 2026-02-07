@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 const baseURL = "https://airline-booking-backend-58y6.onrender.com";
+// const baseURL = "http://localhost:5050";
+axios.defaults.withCredentials = true;
 
 export const adminLogin = createAsyncThunk(
   "admin/login",
@@ -29,7 +31,7 @@ export const loadUser = createAsyncThunk("admin/loadUser", async () => {
   const token = localStorage.getItem("token");
   const admin = localStorage.getItem("admin");
 
-  if (!token || !admin) return null;
+  // if (!token || !admin) return null;
 
   return {
     token,
@@ -42,17 +44,16 @@ const adminSlice = createSlice({
   initialState: {
     loading: false,
     error: null,
-    admin: null,
+    admin: [],
     message: null,
-    token: null,
     isAuth: false,
   },
   reducers: {
     adminLogout(state) {
-      ((state.admin = null),
+      (state.admin = null),
         (state.error = null),
-        (state.isAuth = false),
-        (state.token = null));
+        (state.isAuth = false)
+        
     },
   },
   extraReducers: (builder) => {
@@ -62,7 +63,6 @@ const adminSlice = createSlice({
       })
       .addCase(adminLogin.fulfilled, (state, action) => {
         ((state.loading = false), (state.admin = action.payload.admin));
-        state.token = action.payload.token;
         state.message = action.payload.message;
         state.error = null;
         state.isAuth = true;
@@ -77,7 +77,6 @@ const adminSlice = createSlice({
       });
     builder.addCase(loadUser.fulfilled, (state, action) => {
       if (action.payload) {
-        state.token = action.payload.token;
         state.admin = action.payload.admin;
         state.isAuth = true;
       }

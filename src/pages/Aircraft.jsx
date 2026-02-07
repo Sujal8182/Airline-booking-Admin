@@ -61,7 +61,7 @@ const Aircraft = () => {
                 </td>
               </tr>
             )}
-
+            
             {list.map(a => (
               <tr key={a._id} className="hover:bg-gray-50">
                 <td className="px-6 py-4 font-medium text-gray-800">
